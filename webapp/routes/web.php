@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/index', [App\Http\Controllers\PostsController::class, 'index']);
+Route::get('/show', [App\Http\Controllers\PostsController::class, 'show']);
 Route::get('/', function () {
     return view('welcome');
 });
