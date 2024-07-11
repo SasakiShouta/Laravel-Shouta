@@ -1,10 +1,11 @@
-<h1>編集画面</h1>
-<form action="{{ route('regist.edit', ['id' => $post->id]) }}" method="post">
+<h1>新規作成画面</h1>
+<form action="{{ route('store.post') }}" method="post">
     @csrf
     <div>
         タイトル
-        <input type="text" name="title" value="{{ $post->title }}">
+        <input type="text" name="title">
     </div>
+
 
     <div>
         投稿者
@@ -17,7 +18,7 @@
     </div>
     <div>
         本文
-        <textarea name="content" id="" cols="30" rows="10">{{ $post->content }}</textarea>
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
     </div>
-    <input type="submit" value="更新する">
+    <input type="submit" value="投稿する">
 </form>

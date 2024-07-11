@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('auther_id');
+            $table->id('id');
+            $table->integer('author_id');
             $table->string('title');
             $table->text('content')->nullable(true);
             $table->timestamps();

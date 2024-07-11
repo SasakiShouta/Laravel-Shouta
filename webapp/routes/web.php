@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/index', [App\Http\Controllers\PostsController::class, 'index']);
-Route::get('/show', [App\Http\Controllers\PostsController::class, 'show']);
+Route::get('/index', [App\Http\Controllers\PostsController::class, 'index'])->name('index');
+Route::get('/create', [App\Http\Controllers\PostsController::class, 'showCreate'])->name('show.create');
+Route::post('/create', [App\Http\Controllers\PostsController::class, 'storePost'])->name('store.post');
+Route::get('/show/{id}', [App\Http\Controllers\PostsController::class, 'showEdit'])->name('show.edit');
+Route::post('/show/{id}', [App\Http\Controllers\PostsController::class, 'registEdit'])->name('regist.edit');
+Route::delete('/delete/{id}', [App\Http\Controllers\PostsController::class, 'deletePost'])->name('delete');
 Route::get('/', function () {
     return view('welcome');
 });
