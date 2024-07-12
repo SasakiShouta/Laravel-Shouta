@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Author;
 
@@ -87,5 +87,34 @@ class PostsController extends Controller
         }
         return redirect()->route('index');
     }
+
+    public function store(ExampleFormRequest $request)
+{
+    $validatedData = $request->validated();
+}
+
+public function store(PostRequest $request)
+    {
+        // 新規投稿作成
+        $post = new Post;
+        $post->title = $request->title;
+        $post->author_id = $request->author_id;
+        $post->content = $request->content;
+        $post->save();
+
+        return redirect()->route('posts.index');
+    }
+
+    public function update(PostRequest $request, Post $post)
+    {
+        // 投稿更新
+        $post->title = $request->title;
+        $post->author_id = $request->author_id;
+        $post->content = $request->content;
+        $post->save();
+
+        return redirect()->route('posts.index');
+    }
+
     //
 }

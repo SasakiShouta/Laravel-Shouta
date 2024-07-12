@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/index', [App\Http\Controllers\PostsController::class, 'index'])->name('index');
-Route::get('/create', [App\Http\Controllers\PostsController::class, 'showCreate'])->name('show.create');
-Route::post('/create', [App\Http\Controllers\PostsController::class, 'storePost'])->name('store.post');
-Route::get('/show/{id}', [App\Http\Controllers\PostsController::class, 'showEdit'])->name('show.edit');
-Route::post('/show/{id}', [App\Http\Controllers\PostsController::class, 'registEdit'])->name('regist.edit');
-Route::delete('/delete/{id}', [App\Http\Controllers\PostsController::class, 'deletePost'])->name('delete');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
