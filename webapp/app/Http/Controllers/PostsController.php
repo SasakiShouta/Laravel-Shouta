@@ -58,7 +58,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function registEdit(Request $request, $id)
+    public function registEdit(ExampleFormRequest $request, $id)
     {
         $model = new Post();
         try{
