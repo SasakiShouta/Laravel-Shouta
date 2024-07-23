@@ -58,11 +58,15 @@ class PostsController extends Controller
         ]);
     }
 
-    public function registEdit(Request $request, $id)
+    public function registEdit(ExampleFormRequest $request, $id)
     {
         $model = new Post();
         try{
             DB::beginTransaction();
+            $post->title = $request->title;
+            $post->author_id = $request->author_id;
+            $post->content = $request->content;
+            $post->save();
             $model->updatePost($request, $id);
             DB::commit();
         } catch(\Exception $e){
@@ -91,30 +95,16 @@ class PostsController extends Controller
     public function store(ExampleFormRequest $request)
 {
     $validatedData = $request->validated();
+
+    // 新規投稿作成
+    $post = new Post;
+    $post->title = $request->title;
+    $post->author_id = $request->author_id;
+    $post->content = $request->content;
+    $post->save();
 }
 
-public function store(PostRequest $request)
-    {
-        // 新規投稿作成
-        $post = new Post;
-        $post->title = $request->title;
-        $post->author_id = $request->author_id;
-        $post->content = $request->content;
-        $post->save();
 
-        return redirect()->route('posts.index');
-    }
-
-    public function update(PostRequest $request, Post $post)
-    {
-        // 投稿更新
-        $post->title = $request->title;
-        $post->author_id = $request->author_id;
-        $post->content = $request->content;
-        $post->save();
-
-        return redirect()->route('posts.index');
-    }
 
     //
 }

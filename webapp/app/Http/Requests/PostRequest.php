@@ -11,7 +11,7 @@ class PostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,9 +22,9 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            $request->cher('title');
-            $request->int('author_id');
-            $request->string('content')->nullable(true);
+            'title' => 'required|max:255',
+            'author_id' => 'required|integer',
+            'content' => 'nullable|max:1000',
             //
         ];
     }
