@@ -20,6 +20,7 @@ class RemotePostController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         try {
             // バリデーション
             $validatedData = $request->validate([
@@ -30,9 +31,16 @@ class RemotePostController extends Controller
             // 新しい投稿を作成
             $post = Post::create($validatedData);
 
+            // コミット
+            DB::commit();
+
             // 成功メッセージ
             return response()->json(['message' => 'success post', 'data' => $post], 201);
         } catch (\Exception $e) {
+
+            // ロールバック
+            DB::rollback();
+            
             // エラーメッセージ
             return response()->json(['error' => $e->getMessage()], 500);
         }//
