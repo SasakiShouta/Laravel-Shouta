@@ -24,8 +24,8 @@ services:
       dockerfile: ./docker/db/Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
       MYSQL_DATABASE: Laravel
       TZ: "Asia/Tokyo"
     networks:

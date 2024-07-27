@@ -52,6 +52,9 @@ class PostsController extends Controller
         $post = Post::find($id);
         $authors = Author::all();
 
+         // $post の情報を info レベルでログに出力
+         Log::info('Post details:', $post->toArray());
+         
         return view ('show', [
             'post' => $post,
             'authors' => $authors
